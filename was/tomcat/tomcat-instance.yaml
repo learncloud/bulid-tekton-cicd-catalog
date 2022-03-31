@@ -1,0 +1,43 @@
+apiVersion: tmax.io/v1
+kind: TemplateInstance
+metadata:
+  name: tomcat-cicd-template-instance
+  namespace: default
+  annotations:
+    template-version: 5.0.6
+    tested-operator-version: 0.2.5
+  labels:
+    cicd-template-was: tomcat
+spec:
+  clustertemplate:
+    metadata:
+      name: tomcat-cicd-template
+    parameters:
+    - name: APP_NAME
+      value: tomcat-sample-app
+    - name: GIT_TYPE
+      value: gitlab
+    - name: GIT_API_URL
+      value: http://<깃랩URL>
+    - name: GIT_REPOSITORY
+      value: root/TomcatMavenApp
+    - name: GIT_TOKEN_SECRET
+      value: cicd-example-git-token
+    - name: IMAGE_URL
+      value: '<이미지 주소>'
+    - name: REGISTRY_SECRET_NAME
+      value: ''
+    - name: STORAGE_CLASS
+      value: csi-cephfs-sc
+    - name: WAS_PORT
+      value: 8080
+    - name: SERVICE_TYPE
+      value: LoadBalancer
+    - name: PACKAGE_SERVER_URL
+      value: ''
+    - name: DEPLOY_ENV_JSON
+      value: "{'EX':'EXVAL', 'EX2':'EXVAL2'}"
+    - name: DEPLOY_RESOURCE_CPU
+      value: 500m
+    - name: DEPLOY_RESOURCE_MEM
+      value: 500Mi
